@@ -1,0 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    Map<Integer, Integer> depth = new HashMap<>();
+    Map<Integer, TreeNode> parent = new HashMap<>();
+
+    public boolean isCousins(TreeNode root, int x, int y) {
+        dfs(root, null);
+        if(depth.get(x) == depth.get(y) && parent.get(x) != parent.get(y)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void dfs(TreeNode Node, TreeNode par){
+        if (Node != null){
+            if (par != null){
+            depth.put(Node.val, 1 + depth.get(par.val));
+        } else {
+            depth.put(Node.val, 0);
+        }
+
+        parent.put(Node.val, par);
+
+        dfs(Node.left, Node);
+        dfs(Node.right, Node);
+        }
+
+    }
+}
