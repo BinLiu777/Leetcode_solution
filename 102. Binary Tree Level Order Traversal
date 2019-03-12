@@ -33,11 +33,8 @@ class Solution {
                 }
                 count--;
             }
-
             big_list.add(small_list);
         }
-
-
         return big_list;
     }
 
