@@ -1,0 +1,13 @@
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        int len = prices.length;
+        int[] stock = new int[len];
+        int[] not_stock = new int[len];
+        stock[0] = -prices[0];
+        for(int i = 1; i < len ; i++){
+            stock[i] = Math.max(stock[i-1], not_stock[i-1] - prices[i]);
+            not_stock[i] = Math.max(not_stock[i-1], stock[i-1] + prices[i] - fee);
+        }
+        return not_stock[len-1];
+    }
+}
