@@ -1,0 +1,22 @@
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        Set<Integer> set = new HashSet();
+        if(head == null){
+            return head;
+        }
+        set.add(head.val);
+        for(ListNode l = head; l.next != null; l = l.next){
+            while(set.contains(l.next.val)){
+                l.next = l.next.next;
+                if(l.next == null){
+                    break;
+                }
+            }
+            if(l.next == null){
+                    break;
+                }
+            set.add(l.next.val);
+        }
+        return head;
+    }
+}
