@@ -1,0 +1,29 @@
+class Solution {
+
+  int position = 1;
+    // 中序遍历
+    public int kthSmallest(TreeNode root, int k) {
+       int temp = -1;
+
+        if (root.left != null) {
+             temp = kthSmallest(root.left, k);
+        }
+
+        if(temp == -1){
+            if (position++ == k) {
+                return root.val;
+            }
+        }
+
+        if(temp == -1){
+            if (root.right != null) {
+             temp = kthSmallest(root.right, k);
+            }
+        }
+
+        return temp;
+    }
+}
+//深度搜索时（前中后序），如果函数有return，不可以 return 此函数，需要记录返回值，最后再返回，
+//不然函数递归时，每次都会在第一次调本身时返回，后面的都将不会执行
+//比如上题，若 return kthSmallest(root.left, k)，那么后面的永远走不到，递归就走不到根节点和右节点。
