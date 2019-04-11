@@ -1,0 +1,19 @@
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        Stack<Integer> stack = new Stack();
+        Map<Integer, Integer> map = new HashMap();
+        int[] res = new int[nums1.length];
+        for(int num : nums2){
+            while(!stack.isEmpty() && stack.peek() < num){
+            //要先写!stack.isEmpty()！！！
+            //因为电脑按顺序判断，若stack.peek() < num写在前面，电脑会先判断stack.peek() < num，则会报空栈异常
+                    map.put(stack.pop(), num);
+                }
+                stack.push(num);
+        }
+        for(int i = 0; i < nums1.length; i++){
+            res[i] = map.getOrDefault(nums1[i], -1);
+        }
+        return res;
+    }
+}
