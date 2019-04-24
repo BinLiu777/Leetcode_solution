@@ -1,0 +1,25 @@
+class Solution {
+    public List<String> readBinaryWatch(int num) {
+        List<String> list = new LinkedList<>();
+        for(int i = 0; i < 12; i++){
+            for(int j = 0; j < 60; j++){
+                if(count(i) + count(j) == num){
+                    if(j>=10)
+                        list.add(i+":"+j);
+                    else
+                        list.add(i+":0"+j);
+                }
+            }
+        }
+        return list;
+    }
+
+    private int count(int n){
+        int res = 0;
+        while(n != 0){
+            n = n & (n-1);
+            res++;
+        }
+        return res;
+    }
+}
