@@ -1,0 +1,24 @@
+class Solution {
+    public int countPrimeSetBits(int L, int R) {
+        int sum = 0;
+        for(int i = L; i <= R; i++){
+            int c = 0;
+            int t = i;
+            while(t > 0){
+                if(t % 2 == 1){
+                    c++;
+                }
+                t /=2;
+            }
+            if(isPrime(c)){
+                sum++;
+            }
+        }
+        return sum;
+    }
+    private static boolean isPrime(int count) {
+		if(count == 2 || count == 3 || count == 5 || count == 7 || count == 11 || count == 13 || count == 17 || count == 19)
+			return true;
+		return false;
+	}
+}
