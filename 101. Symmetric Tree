@@ -1,0 +1,28 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+
+        return isSubSymmetric(root, root);
+
+    }
+    private boolean isSubSymmetric(TreeNode rootL, TreeNode rootR){
+        if(rootL == null && rootR == null){
+            return true;
+        }
+        if(rootL == null || rootR == null){
+            return false;
+        }
+        if(rootL.val != rootR.val){
+            return false;
+        }
+        return isSubSymmetric(rootL.left, rootR.right) && isSubSymmetric(rootR.left, rootL.right);
+    }
+}
