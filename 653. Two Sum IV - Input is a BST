@@ -1,0 +1,58 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    // List<Integer> list = new LinkedList<Integer>();
+     public boolean findTarget(TreeNode root, int k) {
+         if(root == null){
+             return false;
+         }
+         return findTargetRec(root,root,k);
+
+    //     inOrder(root);
+    //     int i = 0;
+    //     int j = list.size()-1;
+    //     while(i < j){
+    //         int sum = list.get(i) + list.get(j);
+    //         if(sum == k){
+    //             return true;
+    //         } else if(sum < k){
+    //             i++;
+    //         } else{
+    //             j--;
+    //         }
+    //     }
+    //     return false;
+    //  }
+    // private void inOrder(TreeNode root){
+    //     if(root == null){
+    //         return;
+    //     }
+    //     inOrder(root.left);
+    //     list.add(root.val);
+    //     inOrder(root.right);
+     }
+    public boolean findTargetRec(TreeNode root, TreeNode node, int k){
+        if(node == null){
+             return false;
+         }
+         TreeNode res = findV(root,k - node.val);
+
+         if(res != null && res != node){
+             return true;
+         }
+         return findTargetRec(root, node.left, k) || findTargetRec(root, node.right, k);
+    }
+    public TreeNode findV(TreeNode node,int v){
+        if (node == null) return null;
+        if (node.val == v) return node;
+        if (v < node.val) return findV(node.left,v);
+        else return findV(node.right,v);
+    }
+}
