@@ -1,0 +1,25 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int origial_color = image[sr][sc];
+        floodFill(image, sr, sc, newColor, origial_color);
+        return image;
+    }
+    private void floodFill(int[][] image, int sr, int sc, int newColor, int oriColor){
+        if(!isArea(image, sr, sc)) return;
+        if(image[sr][sc] != oriColor) return;
+        if(image[sr][sc] == -1) return;
+
+        image[sr][sc] = -1;
+        floodFill(image, sr - 1, sc, newColor, oriColor);
+        floodFill(image, sr + 1, sc, newColor, oriColor);
+        floodFill(image, sr, sc - 1, newColor, oriColor);
+        floodFill(image, sr, sc + 1, newColor, oriColor);
+        image[sr][sc] = newColor;
+    }
+    private boolean isArea(int[][] image, int sr, int sc){
+        if(sr >= 0 && sr < image.length && sc >= 0 && sc < image[0].length) {
+            return true;
+        }
+        return false;
+    }
+}
